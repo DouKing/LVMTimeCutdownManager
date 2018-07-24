@@ -1,17 +1,34 @@
 # LVMTimeCutdownManager
-倒计时管理
+
+A time cutdown manager, use it to manage your time cutdown.
+
+## How it works
+
+The LVMTimeCutdownManager manage a `NSTimer` inside, and when the timer tick, the manager can give a callback.
+If you set the `cutdownFormats`, the manager can also convert the residual time interval to a string as your format.
+
+## Usage
 
 ```
-   // 初始化
-   self.manager = [[LVMTimeCutdownManager alloc] initWithFutureTimeIntervalSine1970:0 cutdownInterval:0.1];
-   // 指定格式
-   self.manager.cutdownFormats = @[@"%d月", @"%02d日", @"%02d时 ", @"%02d分 ", @"%02d.", @"%03d"];
-   // 设置代理
-   self.manager.delegate = self;
- 
-   // 实现代理
-   - (void)timeCutdownManagerDidRefreshCutdown:(LVMTimeCutdownManager *)manager {
-    NSLog(@"%@", manager.cutdownIntrol);    ///< 59分 46.799
-   }
+
+// init your manager 
+self.manager = [[LVMTimeCutdownManager alloc] initWithFutureTimeIntervalSine1970:0 cutdownInterval:0.1];
+// set your formats
+self.manager.cutdownFormats = @[@"%d月", @"%02d日", @"%02d时 ", @"%02d分 ", @"%02d.", @"%03d"];
+// give a delegate to the manager so you can obtain the callback 
+self.manager.delegate = self;
+
+// implement the protocol
+- (void)timeCutdownManagerDidRefreshCutdown:(LVMTimeCutdownManager *)manager {
+   NSLog(@"%@", manager.cutdownIntrol);    ///< 59分 46.799
+}
+
 ```
 
+## Install
+
+Drag the `Source` directory to your project. And import `LVMTimeCutdownManager.h` to your file that you want to use the manager.
+
+## License
+
+See LICENSE.
